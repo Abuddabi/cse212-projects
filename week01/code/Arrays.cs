@@ -8,12 +8,21 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Plan:
+        // allocate result array of size 'length'
+        // for each i -> compute number * (i+1) -> store
+        // return array
 
-        return []; // replace this return statement with your own
+        double[] result = new double[length];
+        for (int i = 0; i < length; i++)
+        {
+            // This loop will run 'length' times
+            // On each iteration, calculate the multiple of 'number' by (i + 1)
+            // Store the result in an array at index i
+            result[i] = number * (i + 1);
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -25,9 +34,30 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Plan: 
+        // allocate temp array, 
+        // compute each element's new index (i+amount, wrap if past end),
+        // fill temp
+        // overwrite original list.
+
+        // Create a new array to hold the rotated values (temporary storage)
+        int[] rotated = new int[data.Count];
+        for (int i = 0; i < data.Count; i++)
+        {
+            // Calculate the new position for each element
+            int newPosition = i + amount;
+            while (newPosition > (data.Count - 1))
+            {
+                newPosition -= data.Count;
+            }
+            rotated[newPosition] = data[i];
+        }
+
+        // Clear the original list and add the rotated values
+        data.Clear();
+        for (int i = 0; i < rotated.Length; i++)
+        {
+            data.Add(rotated[i]);
+        }
     }
 }
