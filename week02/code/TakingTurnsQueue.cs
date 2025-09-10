@@ -40,10 +40,15 @@ public class TakingTurnsQueue
         else
         {
             Person person = _people.Dequeue();
+            // if not the last turn, put back in queue
+            if (person.Turns != 1)
+            {
+                _people.Enqueue(person);
+            }
+
             if (person.Turns > 1)
             {
                 person.Turns -= 1;
-                _people.Enqueue(person);
             }
 
             return person;

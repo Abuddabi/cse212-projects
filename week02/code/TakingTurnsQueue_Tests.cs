@@ -12,6 +12,7 @@ public class TakingTurnsQueueTests
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
+    // 1. In PersonQueue.Enqueue, the person was being added to the front of the queue instead of the back. Changed _queue.Insert(0, person) to _queue.Add(person) to ensure FIFO behavior.  
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -117,6 +118,7 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
     // Defect(s) Found: 
+    // 1. In TakingTurnsQueue.GetNextPerson re-enqueued only when person.Turns > 1, which led to incorrect behavior. Fix: re-enqueue when person.Turns != 1
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
